@@ -14,9 +14,9 @@ class PSO_EACHS(RoutingProtocol):
         super().__init__()
         self.params = {
             'swarm_size': 30,
-            'numiteres': 100,
-            'C1': 2.0,
-            'C2': 2.0,
+            'numiteres': 30,
+            'C1': 2.0, # cognitive constant
+            'C2': 1.5, # social constant
             'W': 0.7,
             'vmax': 200,
             'alpha': 0.3,
@@ -151,12 +151,12 @@ class PSO_EACHS(RoutingProtocol):
                 pop[j]['cluster'] = self.get_cluster(network, pop[j]['centroid'])
                 pop[j]['fitness'] = self.get_fitness(network, pop[j]['centroid'], pop[j]['cluster'])
                 if pop[j]['fitness'] < pop[j]['local_best']['fitness']:
-                    pop[j]['local_best'] = pop[j]
+                    pop[j]['local_best'] = deepcopy(pop[j])
                 if pop[j]['fitness'] < global_best['fitness']:
                     global_best = deepcopy(pop[j])
             fit_mean = np.mean([particle['fitness'] for particle in pop])
             # postfix
-            tqdm.write('Iteration: {}, fitness: {} / g_fit: {}'.format(i, np.round(fit_mean, 3), np.round(global_best['fitness'], 3)))
+            tqdm.write('Iteration: {}, mean_fit: {} / g_fit: {}'.format(i, np.round(fit_mean, 3), np.round(global_best['fitness'], 3)))
         return global_best['centroid'], global_best['cluster']
     
     def get_cluster(self, network, centroids):
