@@ -1,3 +1,4 @@
+from copy import deepcopy
 from hashlib import new
 import logging, sys
 import config as cf
@@ -13,7 +14,7 @@ class PSO_EACHS(RoutingProtocol):
         super().__init__()
         self.params = {
             'swarm_size': 30,
-            'numiteres': 10,
+            'numiteres': 100,
             'C1': 2.0,
             'C2': 2.0,
             'W': 0.7,
@@ -120,7 +121,7 @@ class PSO_EACHS(RoutingProtocol):
             pop[i]['fitness'] = fitness[i]
             pop[i]['local_best'] = pop[i]
             pop[i]['velocity'] = [(0, 0) for i in range(len(pop[i]['cluster']))]
-            
+        fit_mean = np.mean(fitness)
         for i in tqdm(range(self.params['numiteres'])):
             for j in range(self.params['swarm_size']):
                 # update velocity
@@ -152,7 +153,10 @@ class PSO_EACHS(RoutingProtocol):
                 if pop[j]['fitness'] < pop[j]['local_best']['fitness']:
                     pop[j]['local_best'] = pop[j]
                 if pop[j]['fitness'] < global_best['fitness']:
-                    global_best = pop[j]
+                    global_best = deepcopy(pop[j])
+            fit_mean = np.mean([particle['fitness'] for particle in pop])
+            # postfix
+            tqdm.write('Iteration: {}, fitness: {} / g_fit: {}'.format(i, np.round(fit_mean, 3), np.round(global_best['fitness'], 3)))
         return global_best['centroid'], global_best['cluster']
     
     def get_cluster(self, network, centroids):

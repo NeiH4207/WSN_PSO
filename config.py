@@ -37,30 +37,6 @@ scenario8 = ('PSO_EACHS',    None,              'zero',  None)
 # scenario32 = ('FCM',   None,              'zero',  'BS at (65,65)')
 # scenario33 = ('FCM',   None,              'zero',  'BS at (0,0)')
 # scenario34 = ('FCM',   None,              'zero',  'BS at (-65,-65)')
-# list with all scenarios to simulate
-
-# example of configuration to get first part of results
-#scenarios = [
-#              "cf.FITNESS_ALPHA=0.5",
-#              "cf.FITNESS_BETA=0.5",
-              #scenario3,
-#              "plot_clusters(network)",
-#              scenario0,
-              #scenario1,
-              #scenario2,
-              #scenario5,
-#              scenario4,
-#              "plot_time_of_death(network)",
-#              "plot_traces(traces)",
-#              "network.get_BS().pos_y=-75.0",
-#              scenario3,
-#              scenario0,
-#              scenario1,
-#              scenario2,
-#              scenario5,
-#              scenario4,
-#              "save2csv(traces)",
-#            ]
 
 scenarios = [
               "cf.FITNESS_ALPHA=0.7",
@@ -87,35 +63,6 @@ scenarios = [
               "save2csv_raw(traces)",
               "plot_traces(traces)",
             ]
-
-#scenarios = [
-#              "cf.FITNESS_ALPHA=0.5",
-#              "cf.FITNESS_BETA=0.5",
-#              scenario4,
-#              scenario5,
-#              scenario6,
-#              "cf.FITNESS_ALPHA=0.75",
-#              "cf.FITNESS_BETA=0.25",
-#              scenario4,
-#              scenario5,
-#              scenario6,
-#              "cf.FITNESS_ALPHA=0.25",
-#              "cf.FITNESS_BETA=0.75",
-#              scenario4,
-#              scenario5,
-#              scenario6,
-#              "cf.FITNESS_ALPHA=1.0",
-#              "cf.FITNESS_BETA=0.0",
-#              scenario4,
-#              scenario5,
-#              scenario6,
-#              "cf.FITNESS_ALPHA=0.0",
-#              "cf.FITNESS_BETA=1.0",
-#              scenario4,
-#              scenario5,
-#              scenario6,
-#              "save2csv(traces)",
-#            ]
 
 ## tracer options
 TRACE_ENERGY         = 1
